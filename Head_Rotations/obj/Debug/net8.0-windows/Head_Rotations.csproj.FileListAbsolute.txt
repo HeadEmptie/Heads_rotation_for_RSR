@@ -1,0 +1,12 @@
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\bin\Debug\net8.0-windows\Head_Rotations.deps.json
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\bin\Debug\net8.0-windows\Head_Rotations.dll
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\bin\Debug\net8.0-windows\Head_Rotations.pdb
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\Head_Rotations.csproj.AssemblyReference.cache
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\Head_Rotations.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\Head_Rotations.AssemblyInfoInputs.cache
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\Head_Rotations.AssemblyInfo.cs
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\Head_Rotations.csproj.CoreCompileInputs.cache
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\Head_Rotations.dll
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\refint\Head_Rotations.dll
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\Head_Rotations.pdb
+C:\Users\bejer\source\repos\Head_Rotations\Head_Rotations\obj\Debug\net8.0-windows\ref\Head_Rotations.dll
