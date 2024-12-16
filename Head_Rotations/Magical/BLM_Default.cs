@@ -90,7 +90,8 @@ public class BLM_Default : BlackMageRotation
     [RotationDesc(ActionID.ManafontPvE, ActionID.TransposePvE)]
     protected override bool GeneralAbility(IAction nextGCD, out IAction? act)
     {
-        if (IsMoving && HasHostilesInRange && TriplecastPvE.CanUse(out act, usedUp: true)) return true;
+        if (IsMoving && HasHostilesInRange && (TriplecastPvE.CanUse(out act, usedUp: true) || SwiftcastPvE.CanUse(out act))) return true;
+        
 
         return base.GeneralAbility(nextGCD, out act);
     }
@@ -113,6 +114,10 @@ public class BLM_Default : BlackMageRotation
 
         if (InAstralFire)
         {
+            if (AstralFireStacks == 6)
+            {
+                if (SwiftcastPvE.CanUse(out act) ||  TriplecastPvE.CanUse(out act)) return true;
+            }
             if (TriplecastPvE.CanUse(out act, gcdCountForAbility: 5)) return true;
         }
 
@@ -163,11 +168,11 @@ public class BLM_Default : BlackMageRotation
         
         if (UmbralIceStacks < 3)
         {
-            if (BlizzardIiPvE.CanUse(out act) || BlizzardIiiPvE.CanUse(out act)) return true;
+            if (BlizzardIiPvE.CanUse(out act) || UmbralSoulPvE.CanUse(out act) || BlizzardIiiPvE.CanUse(out act)) return true;
         }
         if (Player is { Level: > 58})
         {
-            if (FreezePvE.CanUse(out act) || BlizzardIvPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
+            if (FreezePvE.CanUse(out act) || BlizzardIvPvE.CanUse(out act) || UmbralSoulPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
         }
 
         if (ElementTime < 3u)
@@ -184,7 +189,6 @@ public class BLM_Default : BlackMageRotation
     {
         act = null;
         if (!InAstralFire) return false;
-
         // Finisher 
         if (CurrentMp < FireIvPvE.Info.MPNeed + 800)
         {
@@ -207,8 +211,7 @@ public class BLM_Default : BlackMageRotation
                 if (FlarePvE.CanUse(out act)) return true;
             }
         }
-
-        if (ElementTime >= FlareStarPvE.Info.CastTime * 1.7 && FlareStarPvE.CanUse(out act)) return true;
+        if ( ElementTime >= FlareStarPvE.Info.CastTime * 1.7 && FlareStarPvE.CanUse(out act)) return true;
 
         // Fire Rotation
         if (ElementTimeEndAfter((float)(ExtendTimeSafely ? 5.22: 3.22)))
@@ -276,7 +279,7 @@ public class BLM_Default : BlackMageRotation
     private bool PolyglotDump(out IAction? act)
     {
         act = null;
-        if (ElementTimeEndAfterGCD(3u)) return false;
+        if (ElementTimeEndAfterGCD(3u) || HasSwift) return false;
         if ((IsPolyglotStacksMaxed && EnochianEndAfterGCD(2)) ||
             AmplifierPvE.Cooldown.WillHaveOneChargeGCD(1, 2) || IsMoving)
         {
@@ -288,8 +291,8 @@ public class BLM_Default : BlackMageRotation
     private bool NeedsElement(out IAction? act)
     {
         act = null;
-        if (InAstralFire || InUmbralIce) return false;
-        if (SwiftcastPvE.CanUse(out act) || TransposePvE.CanUse(out act) && InCombat) return true;
+        if (InAstralFire || InUmbralIce || !InCombat) return false;
+        if (SwiftcastPvE.CanUse(out act) || TriplecastPvE.CanUse(out act)) return true;
         // fallback if mana is 800mp or less
         if (BlizzardIiPvE.CanUse(out act) || BlizzardIiiPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
         // fallback if there is no mana
@@ -299,9 +302,9 @@ public class BLM_Default : BlackMageRotation
     private bool MaintainStatus(out IAction? act)
     {
         act = null;
-        if (CombatElapsedLess(3)) return false;
+        if (HasHostilesInRange) return false;
         if (UmbralSoulPvE.CanUse(out act)) return true;
-        if (InAstralFire && TransposePvE.CanUse(out act)) return true;
+        if (InAstralFire && TransposePvE.CanUse(out act) && !InCombat) return true;
 
         return false;
     }

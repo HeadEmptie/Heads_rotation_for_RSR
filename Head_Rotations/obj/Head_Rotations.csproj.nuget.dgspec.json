@@ -1,19 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\Head_Rotations.csproj": {}
+    "C:\\Users\\bejer\\source\\repos\\Heads_rotation_for_RSR\\Head_Rotations\\Head_Rotations.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\Head_Rotations.csproj": {
+    "C:\\Users\\bejer\\source\\repos\\Heads_rotation_for_RSR\\Head_Rotations\\Head_Rotations.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\Head_Rotations.csproj",
+        "projectUniqueName": "C:\\Users\\bejer\\source\\repos\\Heads_rotation_for_RSR\\Head_Rotations\\Head_Rotations.csproj",
         "projectName": "Head_Rotations",
-        "projectPath": "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\Head_Rotations.csproj",
+        "projectPath": "C:\\Users\\bejer\\source\\repos\\Heads_rotation_for_RSR\\Head_Rotations\\Head_Rotations.csproj",
         "packagesPath": "C:\\Users\\bejer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\obj\\",
+        "outputPath": "C:\\Users\\bejer\\source\\repos\\Heads_rotation_for_RSR\\Head_Rotations\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
@@ -52,7 +51,7 @@
           "dependencies": {
             "RotationSolverReborn.Basic": {
               "target": "Package",
-              "version": "[7.1.1.12, )"
+              "version": "[7.1.1.18, )"
             }
           },
           "imports": [

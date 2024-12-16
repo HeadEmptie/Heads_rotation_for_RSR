@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "Head_Rotations/1.0.0": {
         "dependencies": {
-          "RotationSolverReborn.Basic": "7.1.1.12"
+          "RotationSolverReborn.Basic": "7.1.1.18"
         },
         "runtime": {
           "Head_Rotations.dll": {}
@@ -38,15 +38,15 @@
           }
         }
       },
-      "RotationSolverReborn.Basic/7.1.1.12": {
+      "RotationSolverReborn.Basic/7.1.1.18": {
         "dependencies": {
           "Svg": "3.4.7",
           "System.Drawing.Common": "9.0.0"
         },
         "runtime": {
           "lib/net8.0-windows7.0/RotationSolver.Basic.dll": {
-            "assemblyVersion": "7.1.1.12",
-            "fileVersion": "7.1.1.12"
+            "assemblyVersion": "7.1.1.18",
+            "fileVersion": "7.1.1.18"
           }
         }
       },
@@ -99,12 +99,12 @@
       "path": "microsoft.win32.systemevents/9.0.0",
       "hashPath": "microsoft.win32.systemevents.9.0.0.nupkg.sha512"
     },
-    "RotationSolverReborn.Basic/7.1.1.12": {
+    "RotationSolverReborn.Basic/7.1.1.18": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7YunujtdUqg3FhziQGk0RW1oghbeRiISBPgGv0/nW4KxDgyU85m7YqhzjTSdGdOl1IEm88zBZTVPT21+KLr1Fw==",
-      "path": "rotationsolverreborn.basic/7.1.1.12",
-      "hashPath": "rotationsolverreborn.basic.7.1.1.12.nupkg.sha512"
+      "sha512": "sha512-4DHwqi9TmTecC0KprtfJ8C3re+MVPZsqQfib00hoz0feoD6c4CwRlfLuWPenl3eSqzcAXngl1MefaLgeLSZMEg==",
+      "path": "rotationsolverreborn.basic/7.1.1.18",
+      "hashPath": "rotationsolverreborn.basic.7.1.1.18.nupkg.sha512"
     },
     "Svg/3.4.7": {
       "type": "package",
