@@ -33,7 +33,7 @@
           }
         }
       },
-      "RotationSolverReborn.Basic/7.1.1.18": {
+      "RotationSolverReborn.Basic/7.1.5.43": {
         "type": "package",
         "dependencies": {
           "Svg": "3.4.7",
@@ -145,10 +145,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "RotationSolverReborn.Basic/7.1.1.18": {
-      "sha512": "4DHwqi9TmTecC0KprtfJ8C3re+MVPZsqQfib00hoz0feoD6c4CwRlfLuWPenl3eSqzcAXngl1MefaLgeLSZMEg==",
+    "RotationSolverReborn.Basic/7.1.5.43": {
+      "sha512": "GyFI5vKCw/3Q2R5NAZhZa3PgEnqDaq2vGs5aXxcM/X1V+oNGhPvMYk6dd17u5+CMs4wsWh0VlCoPEC6uGDvjlg==",
       "type": "package",
-      "path": "rotationsolverreborn.basic/7.1.1.18",
+      "path": "rotationsolverreborn.basic/7.1.5.43",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -157,7 +157,7 @@
         "README.md",
         "lib/net8.0-windows7.0/RotationSolver.Basic.dll",
         "lib/net8.0-windows7.0/RotationSolver.Basic.xml",
-        "rotationsolverreborn.basic.7.1.1.18.nupkg.sha512",
+        "rotationsolverreborn.basic.7.1.5.43.nupkg.sha512",
         "rotationsolverreborn.basic.nuspec"
       ]
     },
@@ -234,7 +234,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "RotationSolverReborn.Basic >= 7.1.1.18"
+      "RotationSolverReborn.Basic >= 7.1.5.43"
     ]
   },
   "packageFolders": {
@@ -279,8 +279,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
-      }
+        "auditMode": "all"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -288,7 +289,7 @@
         "dependencies": {
           "RotationSolverReborn.Basic": {
             "target": "Package",
-            "version": "[7.1.1.18, )"
+            "version": "[7.1.5.43, )"
           }
         },
         "imports": [
@@ -302,12 +303,26 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.11, 8.0.11]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.11, 8.0.11]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.11, 8.0.11]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\bejer\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

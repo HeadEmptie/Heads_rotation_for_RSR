@@ -3,15 +3,11 @@ using FFXIVClientStructs.FFXIV.Client.UI;
 
 namespace RebornRotations.Tank;
 
-[Rotation("Beta_Unusable", CombatType.PvE, GameVersion = "7.11")]
+[Rotation("Beta_Unusable", CombatType.PvE, GameVersion = "7.15")]
 [SourceCode(Path = "main/BasicRotations/Tank/DRK_Balance.cs")]
 [Api(4)]
 public sealed class DRK_Default : DarkKnightRotation
 {
-    private new IBaseAction ScarletDeliriumPvE { get; } = new BaseAction((ActionID)36928);
-    private new IBaseAction ComeuppancePvE { get; } = new BaseAction((ActionID)36929);
-    private new IBaseAction TorcleaverPvE { get; } = new BaseAction((ActionID)36930);
-    
     #region Config Options
     [RotationConfig(CombatType.PvE, Name = "Keep at least 3000 MP")]
     public bool TheBlackestNight { get; set; } = true;
@@ -105,11 +101,6 @@ public sealed class DRK_Default : DarkKnightRotation
     {
         act = null;
         
-        if (CombatElapsedLessGCD(1))
-        {
-            return false;
-        }
-        
         if (CheckDarkSide)
         {
             if (FloodOfDarknessPvE.CanUse(out act)) return true;
@@ -119,9 +110,14 @@ public sealed class DRK_Default : DarkKnightRotation
 
         if (IsBurst)
         {
-            if (InCombat && LivingShadowPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            Thread.Sleep((int)(GCDTime()*3000));
-            if (InCombat && DeliriumPvE.CanUse(out act)) return true;
+            if (InCombat && LivingShadowPvE.CanUse(out act, skipAoeCheck: true))
+            {
+                return true;
+            }
+
+            if (!LivingShadowPvE.Cooldown.ElapsedAfterGCD(3)) return false;
+           
+            if (InCombat && DeliriumPvE.CanUse(out act, skipCastingCheck: true, skipComboCheck: true)) return true;
             if (DeliriumPvE.EnoughLevel && DeliriumPvE.Cooldown.ElapsedAfterGCD(1) && !DeliriumPvE.Cooldown.ElapsedAfterGCD(3)
                 && BloodWeaponPvE.CanUse(out act)) return true;
             if (!DeliriumPvE.EnoughLevel)
@@ -160,23 +156,23 @@ public sealed class DRK_Default : DarkKnightRotation
 
     protected override bool GeneralGCD(out IAction? act)
     {
-        if (DisesteemPvE.CanUse(out act, skipAoeCheck: true) && Player.HasStatus(true, StatusID.Scorn)) return true;
-
-
-        if (ImpalementPvE.CanUse(out act, skipComboCheck: true)) return true;
-        if (QuietusPvE.CanUse(out act, skipComboCheck: true)) return true;
-
+        if (DisesteemPvE.CanUse(out act) && hasDelirium) return true;
+        
+        //AOE Delirium
+        if (ImpalementPvE.CanUse(out act)) return true;
+        if (QuietusPvE.CanUse(out act)) return true;
+        
+        // Single Target Delirium
+        if (TorcleaverPvE.CanUse(out act, skipComboCheck: true) && BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
+        if (ComeuppancePvE.CanUse(out act, skipComboCheck: true) && BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
+        if (ScarletDeliriumPvE.CanUse(out act, skipComboCheck: true) && BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
+        
         var bloodNeeded = LetBloodGaugeFill ? BloodMin : 0;
         if (Blood >= bloodNeeded || hasDelirium || DeliriumPvE.Cooldown.WillHaveOneChargeGCD(1))
         {
-            if (BloodspillerPvE != null && BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
-            if (ScarletDeliriumPvE.CanUse(out act, skipComboCheck: true) ||
-                ComeuppancePvE.CanUse(out act, skipComboCheck: true) ||
-                TorcleaverPvE.CanUse(out act, skipComboCheck: true)) return true;
+            if (BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
         }
         
-       
-
         //AOE
         if (StalwartSoulPvE.CanUse(out act) || UnleashPvE.CanUse(out act)) return true;
 
@@ -224,9 +220,7 @@ public sealed class DRK_Default : DarkKnightRotation
         get
         {
             if (DarkSideEndAfterGCD(3)) return true;
-
-            if (CombatElapsedLess(3)) return false;
-
+            
             if ((InTwoMIsBurst && HasDarkArts) || (HasDarkArts && Player.HasStatus(true, StatusID.BlackestNight)) || (HasDarkArts && DarkSideEndAfterGCD(3))) return true;
 
             if ((InTwoMIsBurst && BloodWeaponPvE.Cooldown.IsCoolingDown && LivingShadowPvE.Cooldown.IsCoolingDown && SaltedEarthPvE.Cooldown.IsCoolingDown && ShadowbringerPvE.Cooldown.CurrentCharges == 0 && CarveAndSpitPvE.Cooldown.IsCoolingDown)) return true;
@@ -242,7 +236,6 @@ public sealed class DRK_Default : DarkKnightRotation
         get
         {
             if (DeliriumStacks > 0) return true;
-            if (IsLastAbility(ActionID.DeliriumPvE)) return true;
             if (Player.HasStatus(true, (StatusID) 3836)) return true;
             if (Player.HasStatus(true, (StatusID) 1972)) return true;
             if (Player.HasStatus(true, StatusID.Delirium_1996)) return true;

@@ -64,6 +64,6 @@
 		<Using Include="System.Reflection" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="RotationSolverReborn.Basic" Version="7.1.1.18" />
+		<PackageReference Include="RotationSolverReborn.Basic" Version="7.1.5.43" />
 	</ItemGroup>
 </Project>

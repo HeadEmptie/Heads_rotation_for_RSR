@@ -1,6 +1,6 @@
 ﻿
 namespace Head_Rotations.Magical;
-[Rotation("Unlimited Paradox-work", CombatType.PvE, GameVersion = "7.11")]
+[Rotation("Unlimited Paradox-work", CombatType.PvE, GameVersion = "7.15")]
 [SourceCode(Path = "main/BasicRotations/Magical/BLM_Default.cs")]
 [Api(4)]
 public class BLM_Default : BlackMageRotation
@@ -10,10 +10,7 @@ public class BLM_Default : BlackMageRotation
     public new IBaseAction ManafontPvE { get; } = new BaseAction((ActionID)158);
 
     public IBaseAction FixedB4 { get; } = new BaseAction((ActionID)3576);
-
-    /*
-    public new IBaseAction LeyLinesPvE { get; } = new BaseAction((ActionID)3573);
-    */
+    
 
     public static bool NextGCDisInstant => Player.HasStatus(true, StatusID.Triplecast, StatusID.Swiftcast);
 
@@ -27,7 +24,6 @@ public class BLM_Default : BlackMageRotation
         IAction act;
         if (remainTime <= FireIiiPvE.Info.CastTime)
         {
-            if (LeyLinesPvE.CanUse(out act)) return act;
             if (FireIiiPvE.CanUse(out act))
                 return act;
         }
@@ -106,7 +102,6 @@ public class BLM_Default : BlackMageRotation
     {
         if (InCombat)
         {
-            if (LeyLinesPvE.CanUse(out act, usedUp: true)) return true;
             
             if (!IsPolyglotStacksMaxed)
                 if (AmplifierPvE.CanUse(out act))
@@ -148,15 +143,12 @@ public class BLM_Default : BlackMageRotation
         return base.AttackAbility(nextGCD, out act);
     }
 
+    [RotationDesc(ActionID.ManafontPvE, ActionID.TransposePvE, ActionID.LeyLinesPvE)]
     protected override bool GeneralGCD(out IAction? act)
     {
-        if (CombatTime > 1.5)
-        {
-            if (LeyLinesPvE.Cooldown.CurrentCharges == 2)
-            {
-                if (LeyLinesPvE.CanUse(out act)) return true;
-            }
-        }
+        
+        if ((CombatTime < 4 * 2.5 && !IsMoving) || LeyLinesPvE.Cooldown.WillHaveXCharges(2, 30) && InCombat)
+            if (LeyLinesPvE.CanUse(out act)) return true;
         
         if (!NextGCDisInstant && InCombat)
         {
@@ -202,8 +194,7 @@ public class BLM_Default : BlackMageRotation
 
         if (!NextGCDisInstant)
         {
-            if (FoulPvE.CanUse(out act)) return true;
-            if (XenoglossyPvE.CanUse(out act)) return true;
+            if (FoulPvE.CanUse(out act) || XenoglossyPvE.CanUse(out act)) return true;
         }
 
         if (IsParadoxActive)
@@ -215,7 +206,7 @@ public class BLM_Default : BlackMageRotation
                 StatusID.ThunderIv, StatusID.HighThunder_3872, StatusID.HighThunder) || HostileTarget.WillStatusEnd(3,
                 true, StatusID.Thunder, StatusID.ThunderIi, StatusID.ThunderIii, StatusID.ThunderIv,
                 StatusID.HighThunder_3872, StatusID.HighThunder)))
-            if (ThunderPvE.CanUse(out act))
+            if ( ThunderIiPvE.CanUse(out act)||ThunderPvE.CanUse(out act))
                 return true;
 
         if (InAstralFire)
@@ -227,8 +218,9 @@ public class BLM_Default : BlackMageRotation
                 if (ManafontPvE.CanUse(out act))
                     return true;
             if (CurrentMp >= 800)
-                if (DespairPvE.CanUse(out act))
+                if (FlarePvE.CanUse(out act)||DespairPvE.CanUse(out act))
                     return true;
+            if (FlareStarPvE.CanUse(out act)) return true;
         }
         
         if (UmbralIceStacks == 3 && UmbralHearts == 3 && InUmbralIce)

@@ -2,7 +2,7 @@
 
 namespace RebornRotations.Magical;
 
-[Rotation("Beta_needs_Tweaks", CombatType.PvE, GameVersion = "7.11",
+[Rotation("Beta_needs_Tweaks", CombatType.PvE, GameVersion = "7.15",
     Description = "Kindly created and donated by Rabbs and further update made by IcWa")]
 [SourceCode(Path = "main/BasicRotations/Magical/ICWA_PCT_BETA.cs")]
 [Api(4)]
@@ -166,13 +166,25 @@ public sealed class IcWaPctBeta : PictomancerRotation
 
     protected override bool AttackAbility(IAction nextGCD, out IAction? act)
     {
-        if (Player.HasStatus(true, StatusID.StarryMuse))
+
+        if (SubtractivePalettePvE.CanUse(out act) && !Player.HasStatus(true, StatusID.SubtractivePalette)) return true;
+        
+        if (LivingMusePvE.Cooldown.WillHaveXCharges(2, 30) || Player.HasStatus(true, StatusID.StarryMuse))
         {
-            if (FangedMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true,
+            if (AllMuses(out act)) return true;
+        }
+
+        
+        if (BurstMuses(out act) ||Player.HasStatus(true, StatusID.StarryMuse))
+        {
+            if (MogOfTheAgesPvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true,
                     skipComboCheck: true, skipAoeCheck: true, usedUp: true)) return true;
             if (RetributionOfTheMadeenPvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true,
                     skipComboCheck: true, skipAoeCheck: true, usedUp: true)) return true;
         }
+        
+
+        
 
         bool burstTimingCheckerStriking =
             !ScenicMusePvE.Cooldown.WillHaveOneCharge(60) || Player.HasStatus(true, StatusID.StarryMuse);
@@ -182,26 +194,6 @@ public sealed class IcWaPctBeta : PictomancerRotation
         if (CombatTime > adjustCombatTimeForOpener && StrikingMusePvE.CanUse(out act, skipCastingCheck: true,
                 skipStatusProvideCheck: true, skipComboCheck: true, skipAoeCheck: true, usedUp: true) &&
             burstTimingCheckerStriking) return true;
-        if (SubtractivePalettePvE.CanUse(out act) && !Player.HasStatus(true, StatusID.SubtractivePalette)) return true;
-        
-        
-        
-        if (Player.HasStatus(true, StatusID.StarryMuse)
-            || (BurstMuses(out act) &&
-                LivingMusePvE.Cooldown.WillHaveXCharges((uint)LivingMusePvE.Cooldown.MaxCharges - 1,Player.BaseCastTime * 3)))
-        {
-            if (MogOfTheAgesPvE.CanUse(out act)) return true;
-            if (RetributionOfTheMadeenPvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true,
-                    skipComboCheck: true, skipAoeCheck: true, usedUp: true)) return true;
-            if (AllMuses(out act)) return true;
-        }
-
-        if (LivingMusePvE.Cooldown.WillHaveXCharges(
-                (uint)((LivingMusePvE.Cooldown.MaxCharges - 1) == 0 ? 1 : LivingMusePvE.Cooldown.MaxCharges - 1),
-                Player.BaseCastTime * 3) || Player.HasStatus(true, StatusID.StarryMuse))
-        {
-            if (AllMuses(out act)) return true;
-        }
         
         if (ScenicMusePvE.Cooldown.RecastTimeRemainOneCharge > 60 || ScenicMusePvE.Cooldown.WillHaveXChargesGCD(ScenicMusePvE.Cooldown.MaxCharges, 1, 0))
         {
@@ -238,7 +230,12 @@ public sealed class IcWaPctBeta : PictomancerRotation
         if (StarPrismPvE.CanUse(out act, skipAoeCheck: true) && Player.HasStatus(true, StatusID.Starstruck))
             return true;
         
-        if ( NumberOfHostilesInRange >= 2 || IsMoving || SteelMusePvE.Cooldown.WillHaveXCharges(2, Player.CurrentCastTime * 5) ||
+        //aoe sub
+        if (ThunderIiInMagentaPvE.CanUse(out act) || StoneIiInYellowPvE.CanUse(out act) || BlizzardIiInCyanPvE.CanUse(out act)) return true;
+        //single target sub
+        if (ThunderInMagentaPvE.CanUse(out act) || StoneInYellowPvE.CanUse(out act) || BlizzardInCyanPvE.CanUse(out act)) return true;
+        
+        if ( NumberOfHostilesInRange >= 2 || (IsMoving) || SteelMusePvE.Cooldown.WillHaveXCharges(2, Player.CurrentCastTime * 5) ||
             Player.HasStatus(true, StatusID.StarryMuse) || Player.WillStatusEndGCD((uint)HammerStacks + 1,  0 ,true, StatusID.HammerTime))
         {
             if (PolishingHammerPvE.CanUse(out act, skipComboCheck: true) ||
@@ -298,12 +295,9 @@ public sealed class IcWaPctBeta : PictomancerRotation
                 !UseCapCometOnly) return true;
         }
 
-        //aoe sub
-        if (ThunderIiInMagentaPvE.CanUse(out act) || StoneIiInYellowPvE.CanUse(out act) || BlizzardIiInCyanPvE.CanUse(out act)) return true;
+        
         //aoe normal
         if (WaterIiInBluePvE.CanUse(out act) || AeroIiInGreenPvE.CanUse(out act) || FireIiInRedPvE.CanUse(out act)) return true;
-        //single target sub
-        if (ThunderInMagentaPvE.CanUse(out act) || StoneInYellowPvE.CanUse(out act) || BlizzardInCyanPvE.CanUse(out act)) return true;
         //single target normal
         if (WaterInBluePvE.CanUse(out act) || AeroInGreenPvE.CanUse(out act) || FireInRedPvE.CanUse(out act)) return true;
         
@@ -360,20 +354,24 @@ public sealed class IcWaPctBeta : PictomancerRotation
     private bool BurstMuses(out IAction? act)
     {
         act = null;
-        if (WingedMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true, skipComboCheck: true,
-                skipAoeCheck: true, usedUp: true) && LivingMusePvE.AdjustedID == WingedMusePvE.ID) return true;
-        if (FangedMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true, skipComboCheck: true,
-                skipAoeCheck: true, usedUp: true) && LivingMusePvE.AdjustedID == FangedMusePvE.ID) return true;
+        /*if (WingedMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true, skipComboCheck: true,
+                skipAoeCheck: true, usedUp: true) && LivingMusePvE.AdjustedID == WingedMusePvE.ID) return true;*/
+        if (FangedMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true,
+                skipComboCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+        if (WingedMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true,
+                skipComboCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+        
         return false;
     }
 
     private bool AllMuses(out IAction? act)
     {
         act = null;
-        if (PomMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true, skipComboCheck: true,
-                skipAoeCheck: true, usedUp: true) && LivingMusePvE.AdjustedID == PomMusePvE.ID) return true;
-        if (ClawedMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true, skipComboCheck: true,
-                skipAoeCheck: true, usedUp: true) && LivingMusePvE.AdjustedID == ClawedMusePvE.ID) return true;
+        if (PomMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true,
+                skipComboCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+        if (ClawedMusePvE.CanUse(out act, skipCastingCheck: true, skipStatusProvideCheck: true,
+                skipComboCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+
         BurstMuses(out act);
         return false;
     }

@@ -2,7 +2,7 @@
 
 namespace RebornRotations.Magical;
 
-[Rotation("Optimized_Beta", CombatType.PvE, GameVersion = "7.11")]
+[Rotation("Optimized_Beta", CombatType.PvE, GameVersion = "7.15")]
 [SourceCode(Path = "main/BasicRotations/Magical/BLM_Default.cs")]
 [Api(4)]
 public class BLM_Default : BlackMageRotation
@@ -87,11 +87,12 @@ public class BLM_Default : BlackMageRotation
 
     #region oGCD Logic
 
-    [RotationDesc(ActionID.ManafontPvE, ActionID.TransposePvE)]
+    [RotationDesc(ActionID.ManafontPvE, ActionID.TransposePvE, ActionID.LeyLinesPvE)]
     protected override bool GeneralAbility(IAction nextGCD, out IAction? act)
     {
         if (IsMoving && HasHostilesInRange && (TriplecastPvE.CanUse(out act, usedUp: true) || SwiftcastPvE.CanUse(out act))) return true;
-        
+        if ((CombatTime < 4 * 2.5 && !IsMoving)|| LeyLinesPvE.Cooldown.WillHaveXCharges(2, 15))
+            if (LeyLinesPvE.CanUse(out act)) return true;
 
         return base.GeneralAbility(nextGCD, out act);
     }
@@ -105,8 +106,7 @@ public class BLM_Default : BlackMageRotation
         {
             if (UmbralIceStacks == 2 && !HasFire && !IsLastGCD(ActionID.ParadoxPvE))
             {
-                if (SwiftcastPvE.CanUse(out act)) return true;
-                if (TriplecastPvE.CanUse(out act, usedUp: true)) return true;
+                if (SwiftcastPvE.CanUse(out act) ||TriplecastPvE.CanUse(out act, usedUp: true)) return true;
             }
 
             if (UmbralIceStacks < 3 && LucidDreamingPvE.CanUse(out act)) return true;
@@ -170,17 +170,21 @@ public class BLM_Default : BlackMageRotation
         {
             if (BlizzardIiPvE.CanUse(out act) || UmbralSoulPvE.CanUse(out act) || BlizzardIiiPvE.CanUse(out act)) return true;
         }
-        if (Player is { Level: > 58})
+        
+        
+        if (Player is { Level: > 58, CurrentMp: < 9700 })
         {
-            if (FreezePvE.CanUse(out act) || BlizzardIvPvE.CanUse(out act) || UmbralSoulPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
+            if (FreezePvE.CanUse(out act) || BlizzardIvPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
         }
+        
+        if (UmbralIceStacks == 3)
+            if (UmbralSoulPvE.CanUse(out act)) return true;
 
         if (ElementTime < 3u)
         {
-            if (ParadoxPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
+            if (ParadoxPvE.CanUse(out act) || UmbralSoulPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
         }
 
-        if (UmbralSoulPvE.CanUse(out act)) return true;
 
         return false;
     }
@@ -211,7 +215,7 @@ public class BLM_Default : BlackMageRotation
                 if (FlarePvE.CanUse(out act)) return true;
             }
         }
-        if ( ElementTime >= FlareStarPvE.Info.CastTime * 1.7 && FlareStarPvE.CanUse(out act)) return true;
+        if ( ElementTime >= 5.8 && FlareStarPvE.CanUse(out act)) return true;
 
         // Fire Rotation
         if (ElementTimeEndAfter((float)(ExtendTimeSafely ? 5.22: 3.22)))
