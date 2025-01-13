@@ -33,7 +33,7 @@
           }
         }
       },
-      "RotationSolverReborn.Basic/7.1.5.43": {
+      "RotationSolverReborn.Basic/7.1.5.55": {
         "type": "package",
         "dependencies": {
           "Svg": "3.4.7",
@@ -145,10 +145,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "RotationSolverReborn.Basic/7.1.5.43": {
-      "sha512": "GyFI5vKCw/3Q2R5NAZhZa3PgEnqDaq2vGs5aXxcM/X1V+oNGhPvMYk6dd17u5+CMs4wsWh0VlCoPEC6uGDvjlg==",
+    "RotationSolverReborn.Basic/7.1.5.55": {
+      "sha512": "iwkR0YkkQ7q+YonXH4K8HhfK5tmccOTK+KHS8kwc7PC8h3bXoNVgPPjn3kTbKXZayVwlP+BKkc1tmO0v23UljQ==",
       "type": "package",
-      "path": "rotationsolverreborn.basic/7.1.5.43",
+      "path": "rotationsolverreborn.basic/7.1.5.55",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -157,7 +157,7 @@
         "README.md",
         "lib/net8.0-windows7.0/RotationSolver.Basic.dll",
         "lib/net8.0-windows7.0/RotationSolver.Basic.xml",
-        "rotationsolverreborn.basic.7.1.5.43.nupkg.sha512",
+        "rotationsolverreborn.basic.7.1.5.55.nupkg.sha512",
         "rotationsolverreborn.basic.nuspec"
       ]
     },
@@ -234,7 +234,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "RotationSolverReborn.Basic >= 7.1.5.43"
+      "RotationSolverReborn.Basic >= 7.1.5.55"
     ]
   },
   "packageFolders": {
@@ -289,7 +289,7 @@
         "dependencies": {
           "RotationSolverReborn.Basic": {
             "target": "Package",
-            "version": "[7.1.5.43, )"
+            "version": "[7.1.5.55, )"
           }
         },
         "imports": [
