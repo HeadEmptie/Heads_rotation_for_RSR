@@ -4,7 +4,8 @@
 		<DalamudLibPath>$(AppData)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<Nullable>enable</Nullable>
-		<TargetFrameworks>net8.0-windows;net9.0;net8.0</TargetFrameworks>
+		<TargetFrameworks></TargetFrameworks>
+		<TargetFramework>net9.0-windows</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Duty\PVPRotations\**" />
@@ -68,5 +69,8 @@
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
 	  <PackageReference Include="RotationSolverReborn.Basic" Version="7.1.8.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="RotationSolverReborn.Basic" Version="7.2.1.63" />
 	</ItemGroup>
 </Project>

@@ -1,8 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {},
-    "net8.0-windows7.0": {
+    "net9.0-windows7.0": {
       "ExCSS/4.2.3": {
         "type": "package",
         "compile": {
@@ -12,15 +11,15 @@
           "lib/net7.0/ExCSS.dll": {}
         }
       },
-      "Microsoft.Win32.SystemEvents/9.0.1": {
+      "Microsoft.Win32.SystemEvents/9.0.5": {
         "type": "package",
         "compile": {
-          "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+          "lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+          "lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
             "related": ".xml"
           }
         },
@@ -28,25 +27,25 @@
           "buildTransitive/net8.0/_._": {}
         },
         "runtimeTargets": {
-          "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+          "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
         }
       },
-      "RotationSolverReborn.Basic/7.1.8.1": {
+      "RotationSolverReborn.Basic/7.2.1.63": {
         "type": "package",
         "dependencies": {
           "Svg": "3.4.7",
-          "System.Drawing.Common": "9.0.1"
+          "System.Drawing.Common": "9.0.5"
         },
         "compile": {
-          "lib/net8.0-windows7.0/RotationSolver.Basic.dll": {
+          "lib/net9.0-windows7.0/RotationSolver.Basic.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0-windows7.0/RotationSolver.Basic.dll": {
+          "lib/net9.0-windows7.0/RotationSolver.Basic.dll": {
             "related": ".xml"
           }
         }
@@ -68,24 +67,24 @@
           }
         }
       },
-      "System.Drawing.Common/9.0.1": {
+      "System.Drawing.Common/9.0.5": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "9.0.1"
+          "Microsoft.Win32.SystemEvents": "9.0.5"
         },
         "compile": {
-          "lib/net8.0/System.Drawing.Common.dll": {
+          "lib/net9.0/System.Drawing.Common.dll": {
             "related": ".pdb;.xml"
           },
-          "lib/net8.0/System.Private.Windows.Core.dll": {
+          "lib/net9.0/System.Private.Windows.Core.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/System.Drawing.Common.dll": {
+          "lib/net9.0/System.Drawing.Common.dll": {
             "related": ".pdb;.xml"
           },
-          "lib/net8.0/System.Private.Windows.Core.dll": {
+          "lib/net9.0/System.Private.Windows.Core.dll": {
             "related": ".xml"
           }
         },
@@ -93,8 +92,7 @@
           "buildTransitive/net8.0/_._": {}
         }
       }
-    },
-    "net9.0": {}
+    }
   },
   "libraries": {
     "ExCSS/4.2.3": {
@@ -115,10 +113,10 @@
         "readme.md"
       ]
     },
-    "Microsoft.Win32.SystemEvents/9.0.1": {
-      "sha512": "OxjcwJqBW/5A1111+vL9d+5KYTvOzeCTJY9zHZ0kpQI4wX075p6L7inHPSYuf0MGakVjUvaShvw9e9pfbInU2Q==",
+    "Microsoft.Win32.SystemEvents/9.0.5": {
+      "sha512": "D4OYNpmvAsF9MkaY2W8Jue2XuNHDhygvwzo019hs+lP85KaVnOlXmqsjDKr1dHb1DPxDnOKpe6mAgJN7S6ttwg==",
       "type": "package",
-      "path": "microsoft.win32.systemevents/9.0.1",
+      "path": "microsoft.win32.systemevents/9.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -138,7 +136,7 @@
         "lib/net9.0/Microsoft.Win32.SystemEvents.xml",
         "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
         "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
-        "microsoft.win32.systemevents.9.0.1.nupkg.sha512",
+        "microsoft.win32.systemevents.9.0.5.nupkg.sha512",
         "microsoft.win32.systemevents.nuspec",
         "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
         "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.xml",
@@ -147,19 +145,19 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "RotationSolverReborn.Basic/7.1.8.1": {
-      "sha512": "emIrVhWR0FDse3bS3F+Ui15wYCOln5F4NPGhf0WlP8cyuId8diMCTV4l4RiZleFTXEEtGSBc3E4v8QZM0QP9Mw==",
+    "RotationSolverReborn.Basic/7.2.1.63": {
+      "sha512": "qCWXXQ8h1U5kn5CzNaa73/1Qt32lNOriceLUH3F+iexHTTo9nu16oWL44/RWBZbrv2RhWmponBVidcd8Vf3cHQ==",
       "type": "package",
-      "path": "rotationsolverreborn.basic/7.1.8.1",
+      "path": "rotationsolverreborn.basic/7.2.1.63",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "COPYING.LESSER",
         "Logo.png",
         "README.md",
-        "lib/net8.0-windows7.0/RotationSolver.Basic.dll",
-        "lib/net8.0-windows7.0/RotationSolver.Basic.xml",
-        "rotationsolverreborn.basic.7.1.8.1.nupkg.sha512",
+        "lib/net9.0-windows7.0/RotationSolver.Basic.dll",
+        "lib/net9.0-windows7.0/RotationSolver.Basic.xml",
+        "rotationsolverreborn.basic.7.2.1.63.nupkg.sha512",
         "rotationsolverreborn.basic.nuspec"
       ]
     },
@@ -191,10 +189,10 @@
         "svg.nuspec"
       ]
     },
-    "System.Drawing.Common/9.0.1": {
-      "sha512": "TTPkCqSMyMaG8BXlBKYTTJFtLV0SvjjsvgUN598hYgHaX/5B7tdUc2JhQF9vwrYmlzxId+gwFnKYuxQ2XsSz2g==",
+    "System.Drawing.Common/9.0.5": {
+      "sha512": "T/6nqx0B7/uTe5JjBwrKZilLuwfhHLOVmNKlT/wr4A9Dna94mgTdz3lTfrdJ72QRx7IHCv/LzoJPmFSfK/N6WA==",
       "type": "package",
-      "path": "system.drawing.common/9.0.1",
+      "path": "system.drawing.common/9.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -228,18 +226,16 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "system.drawing.common.9.0.1.nupkg.sha512",
+        "system.drawing.common.9.0.5.nupkg.sha512",
         "system.drawing.common.nuspec",
         "useSharedDesignerContext.txt"
       ]
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0": [],
-    "net8.0-windows7.0": [
-      "RotationSolverReborn.Basic >= 7.1.8.1"
-    ],
-    "net9.0": []
+    "net9.0-windows7.0": [
+      "RotationSolverReborn.Basic >= 7.2.1.63"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\bejer\\.nuget\\packages\\": {},
@@ -254,7 +250,6 @@
       "packagesPath": "C:\\Users\\bejer\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\bejer\\source\\repos\\Heads_rotation_for_RSR\\Head_Rotations\\obj\\",
       "projectStyle": "PackageReference",
-      "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
@@ -264,25 +259,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net8.0",
-        "net8.0-windows",
-        "net9.0"
+        "net9.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "projectReferences": {}
-        },
-        "net8.0-windows7.0": {
-          "targetAlias": "net8.0-windows",
-          "projectReferences": {}
-        },
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net9.0-windows7.0": {
+          "targetAlias": "net9.0-windows",
           "projectReferences": {}
         }
       },
@@ -299,32 +284,12 @@
       "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
-        "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48",
-          "net481"
-        ],
-        "assetTargetFallback": true,
-        "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
-      },
-      "net8.0-windows7.0": {
-        "targetAlias": "net8.0-windows",
+      "net9.0-windows7.0": {
+        "targetAlias": "net9.0-windows",
         "dependencies": {
           "RotationSolverReborn.Basic": {
             "target": "Package",
-            "version": "[7.1.8.1, )"
+            "version": "[7.2.1.63, )"
           }
         },
         "imports": [
@@ -338,26 +303,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
+            "version": "[9.0.300, 9.0.300]"
           }
-        },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
-      },
-      "net9.0": {
-        "targetAlias": "net9.0",
-        "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48",
-          "net481"
         ],
-        "assetTargetFallback": true,
-        "warn": true,
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"

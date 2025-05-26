@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{69298E0E-2674-4DC0-93C4-68DE38176BC2}|Head_Rotations\\Head_Rotations.csproj|c:\\users\\bejer\\source\\repos\\head_rotations\\head_rotations\\magical\\full rotation1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69298E0E-2674-4DC0-93C4-68DE38176BC2}|Head_Rotations\\Head_Rotations.csproj|solutionrelative:head_rotations\\magical\\full rotation1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69298E0E-2674-4DC0-93C4-68DE38176BC2}|Head_Rotations\\Head_Rotations.csproj|c:\\users\\bejer\\source\\repos\\head_rotations\\head_rotations\\magical\\blm_unconventional.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69298E0E-2674-4DC0-93C4-68DE38176BC2}|Head_Rotations\\Head_Rotations.csproj|solutionrelative:head_rotations\\magical\\blm_unconventional.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BLM_UNCONVENTIONAL.cs",
+              "DocumentMoniker": "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\Magical\\BLM_UNCONVENTIONAL.cs",
+              "RelativeDocumentMoniker": "Head_Rotations\\Magical\\BLM_UNCONVENTIONAL.cs",
+              "ToolTip": "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\Magical\\BLM_UNCONVENTIONAL.cs",
+              "RelativeToolTip": "Head_Rotations\\Magical\\BLM_UNCONVENTIONAL.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T19:27:18.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Full Rotation1.cs",
+              "DocumentMoniker": "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\Magical\\Full Rotation1.cs",
+              "RelativeDocumentMoniker": "Head_Rotations\\Magical\\Full Rotation1.cs",
+              "ToolTip": "C:\\Users\\bejer\\source\\repos\\Head_Rotations\\Head_Rotations\\Magical\\Full Rotation1.cs",
+              "RelativeToolTip": "Head_Rotations\\Magical\\Full Rotation1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAALsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T19:23:36.044Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
