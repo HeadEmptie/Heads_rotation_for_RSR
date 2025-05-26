@@ -3,7 +3,7 @@ namespace Head_Rotations.Magical;
 [Rotation("Unlimited Paradox-work", CombatType.PvE, GameVersion = "7.15")]
 [SourceCode(Path = "main/BasicRotations/Magical/BLM_Default.cs")]
 [Api(4)]
-public class BLM_Default : BlackMageRotation
+public class BLM_UNCONVENTIONAL : BlackMageRotation
 {
     public new IBaseAction UmbralSoulPvE { get; } = new BaseAction((ActionID)16506);
 

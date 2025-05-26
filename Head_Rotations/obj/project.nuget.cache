@@ -1,17 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "tmMnp0ItC7s=",
+  "dgSpecHash": "UOhEJvRZYBc=",
   "success": true,
   "projectFilePath": "C:\\Users\\bejer\\source\\repos\\Heads_rotation_for_RSR\\Head_Rotations\\Head_Rotations.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bejer\\.nuget\\packages\\excss\\4.2.3\\excss.4.2.3.nupkg.sha512",
-    "C:\\Users\\bejer\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.0\\microsoft.win32.systemevents.9.0.0.nupkg.sha512",
-    "C:\\Users\\bejer\\.nuget\\packages\\rotationsolverreborn.basic\\7.1.5.55\\rotationsolverreborn.basic.7.1.5.55.nupkg.sha512",
+    "C:\\Users\\bejer\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.1\\microsoft.win32.systemevents.9.0.1.nupkg.sha512",
+    "C:\\Users\\bejer\\.nuget\\packages\\rotationsolverreborn.basic\\7.1.8.1\\rotationsolverreborn.basic.7.1.8.1.nupkg.sha512",
     "C:\\Users\\bejer\\.nuget\\packages\\svg\\3.4.7\\svg.3.4.7.nupkg.sha512",
-    "C:\\Users\\bejer\\.nuget\\packages\\system.drawing.common\\9.0.0\\system.drawing.common.9.0.0.nupkg.sha512",
-    "C:\\Users\\bejer\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.11\\microsoft.netcore.app.ref.8.0.11.nupkg.sha512",
-    "C:\\Users\\bejer\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.11\\microsoft.windowsdesktop.app.ref.8.0.11.nupkg.sha512",
-    "C:\\Users\\bejer\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.11\\microsoft.aspnetcore.app.ref.8.0.11.nupkg.sha512"
+    "C:\\Users\\bejer\\.nuget\\packages\\system.drawing.common\\9.0.1\\system.drawing.common.9.0.1.nupkg.sha512"
   ],
   "logs": []
 }

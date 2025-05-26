@@ -1,11 +1,11 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game;
 
-namespace RebornRotations.Magical;
+namespace Head_Rotations.Magical;
 
 [Rotation("Optimized_Beta", CombatType.PvE, GameVersion = "7.15")]
 [SourceCode(Path = "main/BasicRotations/Magical/BLM_Default.cs")]
 [Api(4)]
-public class BLM_Default : BlackMageRotation
+public class BLM_OPTIMIZED : BlackMageRotation
 {
     #region Config Options
 

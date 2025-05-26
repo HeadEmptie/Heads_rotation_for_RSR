@@ -1,12 +1,9 @@
-using System.Threading;
-using FFXIVClientStructs.FFXIV.Client.UI;
+namespace Head_Rotations.Tank;
 
-namespace RebornRotations.Tank;
-
-[Rotation("Beta_Unusable", CombatType.PvE, GameVersion = "7.15")]
-[SourceCode(Path = "main/BasicRotations/Tank/DRK_Balance.cs")]
+[Rotation("Fixed", CombatType.PvE, GameVersion = "7.21")]
+[SourceCode(Path = "main/BasicRotations/Tank/DRK_Default.cs")]
 [Api(4)]
-public sealed class DRK_Default : DarkKnightRotation
+public sealed class DRK_FIXED : DarkKnightRotation
 {
     #region Config Options
     [RotationConfig(CombatType.PvE, Name = "Keep at least 3000 MP")]
@@ -156,19 +153,19 @@ public sealed class DRK_Default : DarkKnightRotation
 
     protected override bool GeneralGCD(out IAction? act)
     {
-        if (DisesteemPvE.CanUse(out act) && hasDelirium) return true;
+        if (DisesteemPvE.CanUse(out act) && HasDelirium ) return true;
         
         //AOE Delirium
         if (ImpalementPvE.CanUse(out act)) return true;
         if (QuietusPvE.CanUse(out act)) return true;
         
         // Single Target Delirium
-        if (TorcleaverPvE.CanUse(out act, skipComboCheck: true) && BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
-        if (ComeuppancePvE.CanUse(out act, skipComboCheck: true) && BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
-        if (ScarletDeliriumPvE.CanUse(out act, skipComboCheck: true) && BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
+        if (TorcleaverPvE.CanUse(out act, skipComboCheck: true)) return true;
+        if (ComeuppancePvE.CanUse(out act, skipComboCheck: true)) return true;
+        if (ScarletDeliriumPvE.CanUse(out act, skipComboCheck: true)) return true;
         
         var bloodNeeded = LetBloodGaugeFill ? BloodMin : 0;
-        if (Blood >= bloodNeeded || hasDelirium || DeliriumPvE.Cooldown.WillHaveOneChargeGCD(1))
+        if (Blood >= bloodNeeded || HasDelirium  || DeliriumPvE.Cooldown.WillHaveOneChargeGCD(1))
         {
             if (BloodspillerPvE.CanUse(out act, skipComboCheck: true)) return true;
         }
@@ -177,7 +174,7 @@ public sealed class DRK_Default : DarkKnightRotation
         if (StalwartSoulPvE.CanUse(out act) || UnleashPvE.CanUse(out act)) return true;
 
         //Single Target
-        if (hasDelirium) return base.GeneralGCD(out act);
+        if (HasDelirium ) return base.GeneralGCD(out act);
         if (SouleaterPvE.CanUse(out act) || SyphonStrikePvE.CanUse(out act) || HardSlashPvE.CanUse(out act)) return true;
         if (UnmendPvE.CanUse(out act)) return true;
 
@@ -186,24 +183,10 @@ public sealed class DRK_Default : DarkKnightRotation
     #endregion
 
     #region Extra Methods
+    
     // Indicates whether the Dark Knight can heal using a single ability.
     public override bool CanHealSingleAbility => false;
-
-    // Logic to determine when to use blood-based abilities.
-    private bool UseBlood
-    {
-        get
-        {
-            // Conditions based on player statuses and ability cooldowns.
-            if (!DeliriumPvE.EnoughLevel || !LivingShadowPvE.EnoughLevel) return true;
-            if (Player.HasStatus(true, StatusID.Delirium_3836)) return true;
-            if ((Player.HasStatus(true, StatusID.Delirium_1972) || Player.HasStatus(true, StatusID.Delirium_3836)) && LivingShadowPvE.Cooldown.IsCoolingDown) return true;
-            if ((DeliriumPvE.Cooldown.WillHaveOneChargeGCD(1) && !LivingShadowPvE.Cooldown.WillHaveOneChargeGCD(3)) || Blood >= 90 && !LivingShadowPvE.Cooldown.WillHaveOneChargeGCD(1)) return true;
-
-            return false;
-
-        }
-    }
+    
     // Determines if currently in a burst phase based on cooldowns of key abilities.
     private bool InTwoMIsBurst
     {
@@ -230,18 +213,6 @@ public sealed class DRK_Default : DarkKnightRotation
             return CurrentMp >= 8500;
         }
     }
-
-    private bool hasDelirium
-    {
-        get
-        {
-            if (DeliriumStacks > 0) return true;
-            if (Player.HasStatus(true, (StatusID) 3836)) return true;
-            if (Player.HasStatus(true, (StatusID) 1972)) return true;
-            if (Player.HasStatus(true, StatusID.Delirium_1996)) return true;
-            if (Player.HasStatus(true, StatusID.BloodWeapon)) return true;
-            return false;
-        }
-    }
+    
     #endregion
 }

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
-namespace RebornRotations.PVPRotations.Ranged;
+namespace Head_Emptie_Rotation.PVPRotations.Melee;
 
-[Rotation("PVP_BETA ", CombatType.PvP, GameVersion = "7.15", Description = "Beta Rotation")]
-[SourceCode(Path = "main/BasicRotations/PVPRotations/Ranged/BRD_Default.PvP.cs")]
+
+[Rotation("RPR_Beta", CombatType.PvP, GameVersion = "7.15", Description = "Test Rotation")]
+[SourceCode(Path = "main/BasicRotations/PVPRotations/Tank/RPR_Default.PvP.cs")]
 [Api(4)]
-public sealed class BRD_DefaultPvP : BardRotation
+public sealed class RPR_Beta : ReaperRotation
 {
     [RotationConfig(CombatType.PvP, Name = "Sprint")]
     public bool UseSprintPvP { get; set; } = false;
@@ -61,9 +61,12 @@ public sealed class BRD_DefaultPvP : BardRotation
             { 1347, Use1347PvP }
         };
 
-        if (purifyStatuses.Any(status => status.Value && Player.HasStatus(true, (StatusID)status.Key)))
+        foreach (var status in purifyStatuses)
         {
-            return PurifyPvP.CanUse(out action);
+            if (status.Value && Player.HasStatus(true, (StatusID)status.Key))
+            {
+                return PurifyPvP.CanUse(out action);
+            }
         }
 
         return false;
@@ -72,25 +75,13 @@ public sealed class BRD_DefaultPvP : BardRotation
     protected override bool EmergencyAbility(IAction nextGCD, out IAction? act)
     {
         act = null;
-        /*var healthPercentage = Player.CurrentHp / Player.MaxHp * 100;*/
         if (GuardCancel && Player.HasStatus(true, StatusID.Guard)) return false;
-        
         if (TryPurify(out act)) return true;
-
         if (UseRecuperatePvP && Player.CurrentHp / Player.MaxHp * 100 < RCValue && RecuperatePvP.CanUse(out act)) return true;
-        
-        if (Player.CurrentHp / Player.MaxHp * 100 <= 30)
-            if (GuardPvP_29735.CanUse(out act))
-                return true;
+
+        if (ArcaneCrestPvP.CanUse(out act)) return true;
 
         return base.EmergencyAbility(nextGCD, out act);
-    }
-
-    [RotationDesc(ActionID.TheWardensPaeanPvP)]
-    protected override bool DispelGCD(out IAction? act)
-    {
-        if (TheWardensPaeanPvP.CanUse(out act)) return true;
-        return base.DispelGCD(out act);
     }
 
     protected override bool AttackAbility(IAction nextGCD, out IAction? act)
@@ -98,14 +89,13 @@ public sealed class BRD_DefaultPvP : BardRotation
         act = null;
         if (GuardCancel && Player.HasStatus(true, StatusID.Guard)) return false;
 
-        if (EncoreOfLightPvP.CanUse(out act, skipAoeCheck: true)) return true;
+        if (GrimSwathePvP.CanUse(out act)) return true;
 
-        if (SilentNocturnePvP.CanUse(out act, skipAoeCheck: true)) return true;
+        if (LemuresSlicePvP.CanUse(out act)) return true;
 
-        if (RepellingShotPvP.CanUse(out act)) return true;
+        if (HarvestMoonPvP.CanUse(out act)) return true;
 
         return base.AttackAbility(nextGCD, out act);
-
     }
     protected override bool GeneralAbility(IAction nextGCD, out IAction? act)
     {
@@ -113,24 +103,41 @@ public sealed class BRD_DefaultPvP : BardRotation
         if (GuardCancel && Player.HasStatus(true, StatusID.Guard)) return false;
 
         return base.GeneralAbility(nextGCD, out act);
-
     }
     protected override bool GeneralGCD(out IAction? act)
     {
         act = null;
         // Early exits for Guard status or Sprint usage
         if (GuardCancel && Player.HasStatus(true, StatusID.Guard)) return false;
-        if (!Player.HasStatus(true, StatusID.Guard) && UseSprintPvP && !Player.HasStatus(true, (StatusID) 1342) && !InCombat && SprintPvP.CanUse(out act)) return true;
+        if (!Player.HasStatus(true, StatusID.Guard) && UseSprintPvP && !Player.HasStatus(true, StatusID.Sprint) && !InCombat && SprintPvP.CanUse(out act)) return true;
 
-        if (HarmonicArrowPvP_41964.CanUse(out act)) return true;
+        if (DeathWarrantPvP.CanUse(out act)) return true;
+        if (ExecutionersGuillotinePvP.CanUse(out act)) return true;
 
-        if (BlastArrowPvP.CanUse(out act)) return true;
-        if (ApexArrowPvP.CanUse(out act)) return true;
+        if (Target.CurrentHp <= Target.MaxHp * 0.5 || HarvestMoonPvP.Cooldown.WillHaveXCharges(2, 5) || Player.CurrentHp <= Player.MaxHp * 0.5)
+        {
+            if(HarvestMoonPvP.CanUse(out act)) return true;
+        }
 
-        if (PitchPerfectPvP.CanUse(out act)) return true;
-        if (PowerfulShotPvP.CanUse(out act)) return true;
+        if (Target.CurrentHp <= Target.MaxHp * 0.25 || EnshroudedTiemRemaining < 5)
+        {
+            if (PerfectioPvP.CanUse(out act)) return true;
+        }
+        
+        // LB finisher
+        if (CommunioPvP.CanUse(out act, usedUp: true)) return true;
+        
+        if (VoidReapingPvP.CanUse(out act, usedUp: true)) return true;
+        if (CrossReapingPvP.CanUse(out act, usedUp: true)) return true;
+        
+        if( LemuresSlicePvP.CanUse(out act, usedUp: true)) return true;
+        
+        if (PlentifulHarvestPvP.CanUse(out act)) return true;
+        if (GrimSwathePvP.CanUse(out act)) return true;
+        if (InfernalSlicePvP.CanUse(out act)) return true;
+        if (WaxingSlicePvP.CanUse(out act)) return true;
+        if (SlicePvP.CanUse(out act)) return true;
 
         return base.GeneralGCD(out act);
-
     }
 }

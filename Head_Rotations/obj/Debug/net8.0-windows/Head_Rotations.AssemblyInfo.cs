@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Head")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5af60e5cf7269cf37c7f795d4f7934803fab268")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c4416a2576279ffa9256bbc1587d64dc1ad7b14")]
 [assembly: System.Reflection.AssemblyProductAttribute("Head_Rotations")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Head_Rotations")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
