@@ -180,10 +180,10 @@ public class BLM_OPTIMIZED : BlackMageRotation
         if (UmbralIceStacks == 3)
             if (UmbralSoulPvE.CanUse(out act)) return true;
 
-        if (ElementTime < 3u)
+        /*if (ElementTime < 3u)
         {
             if (ParadoxPvE.CanUse(out act) || UmbralSoulPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
-        }
+        }*/
 
 
         return false;
@@ -200,6 +200,8 @@ public class BLM_OPTIMIZED : BlackMageRotation
             
         }
 
+
+
         //Aoe Rotation
         if (UmbralHearts <= 3)
         {
@@ -215,10 +217,11 @@ public class BLM_OPTIMIZED : BlackMageRotation
                 if (FlarePvE.CanUse(out act)) return true;
             }
         }
-        if ( ElementTime >= 5.8 && FlareStarPvE.CanUse(out act)) return true;
+        if (FlareStarPvE.CanUse(out act)) return true;
 
         // Fire Rotation
-        if (ElementTimeEndAfter((float)(ExtendTimeSafely ? 5.22: 3.22)))
+        /*if (ElementTimeEndAfter((float)(ExtendTimeSafely ? 5.22 : 3.22)))*//*
+       
         {
             if (ParadoxPvE.CanUse(out act)) return true;
             if (Player.HasStatus(true, StatusID.Firestarter))
@@ -228,7 +231,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
             }
 
             if (FireIiPvE.CanUse(out act) || HighFireIiPvE.CanUse(out act) || FirePvE.CanUse(out act)) return true;
-        }
+        }*/
 
         if (AstralFireStacks < 3)
         {
@@ -248,6 +251,8 @@ public class BLM_OPTIMIZED : BlackMageRotation
 
         if (CurrentMp >= FireIvPvE.Info.MPNeed + 800 && AstralFireStacks >= 3)
         {
+            if (!Player.HasStatus(true, StatusID.Firestarter))
+                if (ParadoxPvE.CanUse(out act)) return true;
             if (FireIiPvE.CanUse(out act) || HighFireIiPvE.CanUse(out act) || FireIvPvE.CanUse(out act) ||
                 FirePvE.CanUse(out act))
                 return true;
@@ -283,7 +288,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
     private bool PolyglotDump(out IAction? act)
     {
         act = null;
-        if (ElementTimeEndAfterGCD(3u) || HasSwift) return false;
+        if (HasSwift) return false;
         if ((IsPolyglotStacksMaxed && EnochianEndAfterGCD(2)) ||
             AmplifierPvE.Cooldown.WillHaveOneChargeGCD(1, 2) || IsMoving)
         {

@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ci8+yNwarJs=",
+  "dgSpecHash": "5GDaFzMD//E=",
   "success": true,
   "projectFilePath": "C:\\Users\\bejer\\source\\repos\\Heads_rotation_for_RSR\\Head_Rotations\\Head_Rotations.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bejer\\.nuget\\packages\\excss\\4.2.3\\excss.4.2.3.nupkg.sha512",
     "C:\\Users\\bejer\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.5\\microsoft.win32.systemevents.9.0.5.nupkg.sha512",
-    "C:\\Users\\bejer\\.nuget\\packages\\rotationsolverreborn.basic\\7.2.1.63\\rotationsolverreborn.basic.7.2.1.63.nupkg.sha512",
+    "C:\\Users\\bejer\\.nuget\\packages\\rotationsolverreborn.basic\\7.2.5.14\\rotationsolverreborn.basic.7.2.5.14.nupkg.sha512",
     "C:\\Users\\bejer\\.nuget\\packages\\svg\\3.4.7\\svg.3.4.7.nupkg.sha512",
     "C:\\Users\\bejer\\.nuget\\packages\\system.drawing.common\\9.0.5\\system.drawing.common.9.0.5.nupkg.sha512",
     "C:\\Users\\bejer\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.300\\microsoft.net.sdk.compilers.toolset.9.0.300.nupkg.sha512"

@@ -52,7 +52,7 @@
           "dependencies": {
             "RotationSolverReborn.Basic": {
               "target": "Package",
-              "version": "[7.2.1.63, )"
+              "version": "[7.2.5.14, )"
             }
           },
           "imports": [
