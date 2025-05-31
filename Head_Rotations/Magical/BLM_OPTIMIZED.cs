@@ -199,7 +199,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
             if (FlarePvE.CanUse(out act) || DespairPvE.CanUse(out act)) return true;
             
         }
-
+        if (FlareStarPvE.CanUse(out act)) return true;
 
 
         //Aoe Rotation
@@ -217,7 +217,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
                 if (FlarePvE.CanUse(out act)) return true;
             }
         }
-        if (FlareStarPvE.CanUse(out act)) return true;
+        
 
         // Fire Rotation
         /*if (ElementTimeEndAfter((float)(ExtendTimeSafely ? 5.22 : 3.22)))*//*
