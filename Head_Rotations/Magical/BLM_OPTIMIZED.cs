@@ -2,7 +2,7 @@
 
 namespace Head_Rotations.Magical;
 
-[Rotation("Optimized_Beta", CombatType.PvE, GameVersion = "7.15")]
+[Rotation("Optimized_Beta", CombatType.PvE, GameVersion = "7.25")]
 [SourceCode(Path = "main/BasicRotations/Magical/BLM_Default.cs")]
 [Api(4)]
 public class BLM_OPTIMIZED : BlackMageRotation
@@ -90,7 +90,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
     [RotationDesc(ActionID.ManafontPvE, ActionID.TransposePvE, ActionID.LeyLinesPvE)]
     protected override bool GeneralAbility(IAction nextGCD, out IAction? act)
     {
-        if (IsMoving && HasHostilesInRange && (TriplecastPvE.CanUse(out act, usedUp: true) || SwiftcastPvE.CanUse(out act))) return true;
+        if (IsMoving && HasHostilesInRange && PolyglotStacks == 0 && !HasSwift && (TriplecastPvE.CanUse(out act, usedUp: true) || SwiftcastPvE.CanUse(out act))) return true;
         if ((CombatTime < 4 * 2.5 && !IsMoving)|| LeyLinesPvE.Cooldown.WillHaveXCharges(2, 15))
             if (LeyLinesPvE.CanUse(out act)) return true;
 
@@ -177,7 +177,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
             if (FreezePvE.CanUse(out act) || BlizzardIvPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
         }
         
-        if (UmbralIceStacks == 3)
+        if (UmbralIceStacks < 3)
             if (UmbralSoulPvE.CanUse(out act)) return true;
 
         /*if (ElementTime < 3u)
@@ -196,6 +196,10 @@ public class BLM_OPTIMIZED : BlackMageRotation
         // Finisher 
         if (CurrentMp < FireIvPvE.Info.MPNeed + 800)
         {
+            if (AstralSoulStacks >= 3 && FlarePvE.CanUse(out act))
+            {
+                 return true;
+            }
             if (FlarePvE.CanUse(out act) || DespairPvE.CanUse(out act)) return true;
             
         }
@@ -312,7 +316,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
     {
         act = null;
         if (HasHostilesInRange) return false;
-        if (UmbralSoulPvE.CanUse(out act)) return true;
+        if (UmbralSoulPvE.CanUse(out act) && (UmbralIceStacks < 3 || UmbralHearts < 3)) return true;
         if (InAstralFire && TransposePvE.CanUse(out act) && !InCombat) return true;
 
         return false;
