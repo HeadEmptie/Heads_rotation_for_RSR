@@ -133,11 +133,12 @@ public class BLM_OPTIMIZED : BlackMageRotation
     {
         if (AddThunder(out act)) return true;
         if (PolyglotDump(out act)) return true;
+
         if (FirePhase(out act)) return true;
         if (IcePhase(out act)) return true;
+
         if (NeedsElement(out act)) return true;
         
-        if (MaintainStatus(out act)) return true;
         return  base.GeneralGCD(out act);
     }
 
@@ -224,18 +225,6 @@ public class BLM_OPTIMIZED : BlackMageRotation
         
 
         // Fire Rotation
-        /*if (ElementTimeEndAfter((float)(ExtendTimeSafely ? 5.22 : 3.22)))*//*
-       
-        {
-            if (ParadoxPvE.CanUse(out act)) return true;
-            if (Player.HasStatus(true, StatusID.Firestarter))
-            {
-                if (FireIiPvE.CanUse(out act) || HighFireIiPvE.CanUse(out act) || FireIiiPvE.CanUse(out act))
-                    return true;
-            }
-
-            if (FireIiPvE.CanUse(out act) || HighFireIiPvE.CanUse(out act) || FirePvE.CanUse(out act)) return true;
-        }*/
 
         if (AstralFireStacks < 3)
         {
@@ -257,6 +246,10 @@ public class BLM_OPTIMIZED : BlackMageRotation
         {
             if (!Player.HasStatus(true, StatusID.Firestarter))
                 if (ParadoxPvE.CanUse(out act)) return true;
+
+            if (Player.HasStatus(true, StatusID.Firestarter) && ParadoxPvEReady)
+                if (FireIiiPvE.CanUse(out act)) return true;
+            
             if (FireIiPvE.CanUse(out act) || HighFireIiPvE.CanUse(out act) || FireIvPvE.CanUse(out act) ||
                 FirePvE.CanUse(out act))
                 return true;
@@ -294,7 +287,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
         act = null;
         if (HasSwift) return false;
         if ((IsPolyglotStacksMaxed && EnochianEndAfterGCD(2)) ||
-            AmplifierPvE.Cooldown.WillHaveOneChargeGCD(1, 2) || IsMoving)
+            AmplifierPvE.Cooldown.WillHaveOneChargeGCD(1, 1) || IsMoving || ManafontPvE.Cooldown.WillHaveOneChargeGCD(1, 2))
         {
             if (FoulPvE.CanUse(out act) || XenoglossyPvE.CanUse(out act)) return true;
         }
@@ -310,16 +303,6 @@ public class BLM_OPTIMIZED : BlackMageRotation
         if (BlizzardIiPvE.CanUse(out act) || BlizzardIiiPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
         // fallback if there is no mana
         return LucidDreamingPvE.CanUse(out act) || ManafontPvE.CanUse(out act);
-    }
-    
-    private bool MaintainStatus(out IAction? act)
-    {
-        act = null;
-        if (HasHostilesInRange) return false;
-        if (UmbralSoulPvE.CanUse(out act) && (UmbralIceStacks < 3 || UmbralHearts < 3)) return true;
-        if (InAstralFire && TransposePvE.CanUse(out act) && !InCombat) return true;
-
-        return false;
     }
 
     #endregion

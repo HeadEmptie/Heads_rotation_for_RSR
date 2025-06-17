@@ -112,7 +112,7 @@ public sealed class DRK_FIXED : DarkKnightRotation
                 return true;
             }
 
-            if (!LivingShadowPvE.Cooldown.ElapsedAfterGCD(3)) return false;
+            if (!LivingShadowPvE.Cooldown.ElapsedAfterGCD(2)) return false;
            
             if (InCombat && DeliriumPvE.CanUse(out act, skipCastingCheck: true, skipComboCheck: true)) return true;
             if (DeliriumPvE.EnoughLevel && DeliriumPvE.Cooldown.ElapsedAfterGCD(1) && !DeliriumPvE.Cooldown.ElapsedAfterGCD(3)
