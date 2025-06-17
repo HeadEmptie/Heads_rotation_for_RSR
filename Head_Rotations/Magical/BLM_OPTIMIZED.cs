@@ -2,7 +2,7 @@
 
 namespace Head_Rotations.Magical;
 
-[Rotation("Optimized_Beta", CombatType.PvE, GameVersion = "7.25")]
+[Rotation("Optimized_Beta", CombatType.PvE, GameVersion = "7.25 hotfix")]
 [SourceCode(Path = "main/BasicRotations/Magical/BLM_Default.cs")]
 [Api(4)]
 public class BLM_OPTIMIZED : BlackMageRotation
@@ -12,9 +12,6 @@ public class BLM_OPTIMIZED : BlackMageRotation
     [RotationConfig(CombatType.PvE,
         Name = "Use Retrace when out of Ley Lines and standing still (Dangerous and Experimental)")]
     private bool UseRetrace { get; set; } = false;
-
-    [RotationConfig(CombatType.PvE, Name = "Extend Astral Fire time more conservatively (3 GCDs) (Default is 2 GCDs)")]
-    private bool ExtendTimeSafely { get; set; } = false;
 
     #endregion
 
@@ -154,7 +151,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
             }
             
             //fallback because paradox is not always being pressed
-            if (IsParadoxActive)
+            if (IsParadoxActive && NumberOfHostilesInRange < 3)
             {
                 if (ParadoxPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
             }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Head")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29d46de4f979f89eb8b665118bcd4d4bc424296a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9444c12debb5915ba4ee212b3e6707a9bfe210ef")]
 [assembly: System.Reflection.AssemblyProductAttribute("Head_Rotations")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Head_Rotations")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
