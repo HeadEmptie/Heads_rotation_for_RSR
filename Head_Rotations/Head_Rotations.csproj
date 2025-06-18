@@ -66,6 +66,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Meele\" />
+	  <Folder Include="Release\" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
 	  <PackageReference Include="RotationSolverReborn.Basic" Version="7.1.8.1" />

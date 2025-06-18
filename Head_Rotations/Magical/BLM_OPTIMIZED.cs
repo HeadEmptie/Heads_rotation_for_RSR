@@ -181,12 +181,6 @@ public class BLM_OPTIMIZED : BlackMageRotation
         if (UmbralIceStacks < 3)
             if (UmbralSoulPvE.CanUse(out act)) return true;
 
-        /*if (ElementTime < 3u)
-        {
-            if (ParadoxPvE.CanUse(out act) || UmbralSoulPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
-        }*/
-
-
         return false;
     }
 
