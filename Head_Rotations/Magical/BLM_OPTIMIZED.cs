@@ -87,8 +87,10 @@ public class BLM_OPTIMIZED : BlackMageRotation
     [RotationDesc(ActionID.ManafontPvE, ActionID.TransposePvE, ActionID.LeyLinesPvE)]
     protected override bool GeneralAbility(IAction nextGCD, out IAction? act)
     {
-        if (IsMoving && HasHostilesInRange && PolyglotStacks == 0 && !HasSwift && (TriplecastPvE.CanUse(out act, usedUp: true) || SwiftcastPvE.CanUse(out act))) return true;
-        if ((CombatTime < 4 * 2.5 && !IsMoving)|| LeyLinesPvE.Cooldown.WillHaveXCharges(2, 15))
+        if (IsMoving && HasHostilesInRange && PolyglotStacks == 0 && !HasSwift) 
+            if ((TriplecastPvE.CanUse(out act, usedUp: true) || SwiftcastPvE.CanUse(out act))) return true;
+
+        if ((CombatTime > 3 * Player.CurrentCastTime && !IsMoving) || LeyLinesPvE.Cooldown.WillHaveXCharges(2, 15))
             if (LeyLinesPvE.CanUse(out act)) return true;
 
         return base.GeneralAbility(nextGCD, out act);
@@ -99,7 +101,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
     {
         act = null;
         if (!InCombat) return false;
-        if (InUmbralIce)
+        /*if (InUmbralIce)
         {
             if (UmbralIceStacks == 2 && !HasFire && !IsLastGCD(ActionID.ParadoxPvE))
             {
@@ -116,7 +118,7 @@ public class BLM_OPTIMIZED : BlackMageRotation
                 if (SwiftcastPvE.CanUse(out act) ||  TriplecastPvE.CanUse(out act)) return true;
             }
             if (TriplecastPvE.CanUse(out act, gcdCountForAbility: 5)) return true;
-        }
+        }*/
 
         if (AmplifierPvE.CanUse(out act)) return true;
         return base.AttackAbility(nextGCD, out act);
@@ -128,8 +130,9 @@ public class BLM_OPTIMIZED : BlackMageRotation
 
     protected override bool GeneralGCD(out IAction? act)
     {
-        if (AddThunder(out act)) return true;
         if (PolyglotDump(out act)) return true;
+        if (AddThunder(out act)) return true;
+        
 
         if (FirePhase(out act)) return true;
         if (IcePhase(out act)) return true;
@@ -151,9 +154,9 @@ public class BLM_OPTIMIZED : BlackMageRotation
             }
             
             //fallback because paradox is not always being pressed
-            if (IsParadoxActive && NumberOfHostilesInRange < 3)
+            if (IsParadoxActive && NumberOfHostilesInRange < 2)
             {
-                if (ParadoxPvE.CanUse(out act) || BlizzardPvE.CanUse(out act)) return true;
+                if (ParadoxPvE.CanUse(out act)) return true;
             }
 
             if (Player.HasStatus(true, StatusID.Firestarter))
@@ -284,7 +287,8 @@ public class BLM_OPTIMIZED : BlackMageRotation
         act = null;
         if (HasSwift) return false;
         if ((IsPolyglotStacksMaxed && EnochianEndAfterGCD(2)) ||
-            AmplifierPvE.Cooldown.WillHaveOneChargeGCD(1, 1) || IsMoving || ManafontPvE.Cooldown.WillHaveOneChargeGCD(1, 2))
+            AmplifierPvE.Cooldown.WillHaveOneChargeGCD(1, 1) || IsMoving 
+            || ManafontPvE.Cooldown.WillHaveOneChargeGCD(1, 2) || (UmbralHearts ==3 && UmbralIceStacks == 3 && Player.CurrentMp == 0))
         {
             if (FoulPvE.CanUse(out act) || XenoglossyPvE.CanUse(out act)) return true;
         }
